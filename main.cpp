@@ -9,20 +9,15 @@
 
 using namespace std;
 
-// Define the complex data structure required by the requirement analysis
-// Map Key: Department Name (e.g., "EECS", "Math")
-// Array [0]: Enrolled Students
-// Array [1]: Waitlisted Students
-// Array [2]: Dropped Students
+// Initialize a map to store department information, each associated with an array of lists for enrolled, waitlisted, and dropped students
 typedef map<string, array<list<string>, 3>> RegistrationMap;
 
-// We use an object-oriented approach with constructors to initialize the simulation state
 class RegistrationSimulation {
 private:
     RegistrationMap deptMap;
     int totalTimePeriods;
 
-    public:
+public:
     // Constructor to initialize the simulation periods instead of manual setters
     RegistrationSimulation(int periods) {
         totalTimePeriods = periods;
@@ -39,29 +34,21 @@ private:
         
         // Close the file
 
-         void displayEnvironment(const string& timeStamp) {
+        void displayEnvironment(const string& timeStamp) {
         cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
         for (const auto& pair : deptMap) {
             cout << "Department: " << pair.first << endl;
             cout << "  [Enrolled]:   " << pair.second[0].size() << " students" << endl;
             cout << "  [Waitlisted]: " << pair.second[1].size() << " students" << endl;
             cout << "  [Dropped]:    " << pair.second[2].size() << " students" << endl;
-        }       
-    }
-        // --- WIREFRAME MOCKUP CODE BELOW ---
-        cout << "Loading initial student requests from " << filename << "..." << endl;
-        deptMap["Computer Science"][0].push_back("Student-101"); 
-        deptMap["Computer Science"][0].push_back("Student-102"); 
-        deptMap["Computer Science"][1].push_back("Student-103"); 
-        deptMap["Physics"][0].push_back("Student-201");          
-    }
-
-   
+        }
+        cout << "========================================\n" << endl;
+    } 
 
     // Define a function to simulate registration changes over time
     // Parameters: map of departments, number of intervals (Handled by class members)
     void runSimulation() {
-      
+        displayEnvironment("Hour 0 (Registration Opens)");
 
         // Begin a time-based simulation for registration changes
             // For 72 time intervals
@@ -78,26 +65,22 @@ private:
                 // system crashes, prerequisite overrides, mass drops
                 
                 // Wait or pause briefly to simulate the passage of time between intervals
-
+        
         // --- WIREFRAME MOCKUP CODE BELOW ---
-            cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
-            for (int i = 1; i <= totalTimePeriods; i++) {
-                if (i == 12) {
-                    // Mocking: select a random student from the list to remove (Enrolled -> Dropped)
-                    string student = deptMap["Computer Science"][0].front();
-                    deptMap["Computer Science"][0].pop_front();
-                    deptMap["Computer Science"][2].push_back(student);
-                    cout << "  -> Removed " << student << " from Enrolled in Computer Science" << endl;
-                }
 
-                if (i == 13) {
-                    // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
-                    string waitlistedStudent = deptMap["Computer Science"][1].front();
-                    deptMap["Computer Science"][1].pop_front();
-                    deptMap["Computer Science"][0].push_back(waitlistedStudent);
-                    cout << "  -> Added " << waitlistedStudent << " to Enrolled in Computer Science" << endl;
-                }
-            }
+        cout << "Loading initial student requests from " << filename << "..." << endl;
+        deptMap["Computer Science"][0].push_back("Student-101"); 
+        deptMap["Computer Science"][0].push_back("Student-102"); 
+        deptMap["Computer Science"][1].push_back("Student-103"); 
+        deptMap["Physics"][0].push_back("Student-201");          
+    }
+
+   
+
+    // Define a function to simulate registration changes over time
+    // Parameters: map of departments, number of intervals (Handled by class members)
+  
+           
 
                   displayEnvironment("Hour " + to_string(totalTimePeriods) + " (Registration Closes)");
     }
