@@ -13,8 +13,13 @@ using namespace std;
 typedef map<string, array<list<string>, 3>> RegistrationMap;
 
 class RegistrationSimulation {
-    private:
+    private:RegistrationMap deptMap;
+    int totalTimePeriods;
     public:
+    // Constructor to initialize the simulation periods instead of manual setters
+    RegistrationSimulation(int periods) {
+        totalTimePeriods = periods;
+    }
 }
 
 void loadData(string& filename) {
