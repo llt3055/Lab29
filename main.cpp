@@ -24,7 +24,7 @@ public:
     }
 
     // Function 1: Load initial data from external file
-    void loadData(string& filename) {
+    void loadData(const string& filename){
         // Open an external file to read initial data about departments and populate the map
         // If file does not open, print an error and exit
         
@@ -33,7 +33,7 @@ public:
             // Insert student into the appropriate list in the array for their department
         
         // Close the file
-
+    }
         void displayEnvironment(const string& timeStamp) {
         cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
         for (const auto& pair : deptMap) {
@@ -79,8 +79,8 @@ public:
             if (i == 13) {
                  // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
                 string waitlistedStudent = deptMap["Computer Science"][1].front();
-                deptMap["Computer Science"][0].pop_front();
-                deptMap["Computer Science"][1].(waitlistedStudent);
+                deptMap["Computer Science"][1].pop_front();
+                deptMap["Computer Science"][0].push_back(waitlistedStudent);
                 cout << "  -> Added " << waitlistedStudent << " to Enrolled in Computer Science" << endl;
             }
         }
