@@ -79,22 +79,28 @@ private:
                 
                 // Wait or pause briefly to simulate the passage of time between intervals
 
-// --- WIREFRAME MOCKUP CODE BELOW ---
-        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
-        for (int i = 1; i <= totalTimePeriods; i++) {
-            if (i = 12) {
-                // Mocking: select a random student from the list to remove (Enrolled -> Dropped)
-                string student = deptMap["Computer Science"][0].front();
-                
+        // --- WIREFRAME MOCKUP CODE BELOW ---
+            cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+            for (int i = 1; i <= totalTimePeriods; i++) {
+                if (i == 12) {
+                    // Mocking: select a random student from the list to remove (Enrolled -> Dropped)
+                    string student = deptMap["Computer Science"][0].front();
+                    deptMap["Computer Science"][0].pop_front();
+                    deptMap["Computer Science"][2].push_back(student);
+                    cout << "  -> Removed " << student << " from Enrolled in Computer Science" << endl;
+                }
+
+                if (i == 13) {
+                    // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
+                    string waitlistedStudent = deptMap["Computer Science"][1].front();
+                    deptMap["Computer Science"][1].pop_front();
+                    deptMap["Computer Science"][0].push_back(waitlistedStudent);
+                    cout << "  -> Added " << waitlistedStudent << " to Enrolled in Computer Science" << endl;
+                }
             }
-            if (i = 13) {
-                 // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
-                string waitlistedStudent = deptMap["Computer Science"][1].front();
-                
-            }
-        }
 
                   displayEnvironment("Hour " + to_string(totalTimePeriods) + " (Registration Closes)");
+    }
             }
         };
 
@@ -102,7 +108,7 @@ private:
 
 // Define main function
 int main() {
-    RegistrationSimulation sim; 
+    RegistrationSimulation sim(72); 
     sim.loadData("students_data.txt");
     sim.runSimulation();
 
