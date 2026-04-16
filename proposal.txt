@@ -1,2 +1,10 @@
 Project Overview:
-My project creates a hackathon team-building simulation, a program designed to model how student developers form groups and shift between projects over a 48-hour registration period. This software will illustrate the dynamics of skill-matching and project assignment in student coding events.
+My project creates a hackathon team-building simulation, a program designes to model how student developer form groups and shift between projects over a 48-hour registration period. This software will illustrates the dynamics of skill-matching and project assignment in student coding events.
+
+Implementation:
+I plan to use a std::map to store and manage datas related to different participants across specified project track. This map will categorize students into three std::lists representing unassigned developers, assigned team members, and dropped participants. The map will have the project track name as its key. The map's value will be an array of these three lists.
+hat track. Another map entry would be for the AI & Machine Learning track; a third might be for Game Design.
+One map entry would be for the Web Development track. The three lists would represent unassigned developers, assigned team members, and students who dropped out of that track. Another map entry would be for the AI & Machine Learning track; a third might be for Game Design.
+
+Simulated events:
+The simulation will focus on three main events: new members registering for a specific track; unassigned members successfully matching into active teams; and students dropping out due to scheduling conflicts or changing interests. At any given time period (representing an hour of the event), new registrations could occur, teams might officially form, or someone may leave the roster.
