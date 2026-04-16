@@ -20,6 +20,48 @@ class RegistrationSimulation {
     RegistrationSimulation(int periods) {
         totalTimePeriods = periods;
     }
+
+    void loadData(const string& filename) {
+        // Open an external file to read initial data about departments and populate the map
+        // If file does not open, print an error and exit
+        
+        // Read data from file and populate map
+            // For each line, extract department and student data
+            // Insert student into the appropriate list in the array for their department
+        
+        // Close the file
+
+        void displayEnvironment(const string& timeStamp) {
+        cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
+        for (const auto& pair : deptMap) {
+            cout << "Department: " << pair.first << endl;
+            cout << "  [Enrolled]:   " << pair.second[0].size() << " students" << endl;
+            cout << "  [Waitlisted]: " << pair.second[1].size() << " students" << endl;
+            cout << "  [Dropped]:    " << pair.second[2].size() << " students" << endl;
+        }
+        cout << "========================================\n" << endl;
+    }
+
+    // Define a function to simulate registration changes over time
+    // Parameters: map of departments, number of intervals (Handled by class members)
+    void runSimulation() {
+        displayEnvironment("Hour 0 (Registration Opens)");
+
+        // Begin a time-based simulation for registration changes
+            // For 72 time intervals
+                // Iterate through each department in the map
+                    // For each department, simulate changes
+                        // Randomly decide if a student is to be added or removed from each category (enrolled, waitlisted, dropped)
+                            // If adding, generate or select a new student name to add to the list
+                            // If removing, select a random student from the list to remove
+                        
+                        // Print the changes for this interval, e.g., "Added {student} to {category} in {department}"
+                        
+                // Simulate more complex registration changes
+                // random events impacting the registration
+                // system crashes, prerequisite overrides, mass drops
+                
+                // Wait or pause briefly to simulate the passage of time between intervals
 }
 
 void loadData(string& filename) {
