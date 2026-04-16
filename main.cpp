@@ -67,31 +67,33 @@ public:
                 // Wait or pause briefly to simulate the passage of time between intervals
         
         // --- WIREFRAME MOCKUP CODE BELOW ---
-
-        cout << "Loading initial student requests from " << filename << "..." << endl;
-        deptMap["Computer Science"][0].push_back("Student-101"); 
-        deptMap["Computer Science"][0].push_back("Student-102"); 
-        deptMap["Computer Science"][1].push_back("Student-103"); 
-        deptMap["Physics"][0].push_back("Student-201");          
-    }
-
-   
-
-    // Define a function to simulate registration changes over time
-    // Parameters: map of departments, number of intervals (Handled by class members)
-  
-           
-
-                  displayEnvironment("Hour " + to_string(totalTimePeriods) + " (Registration Closes)");
-    }
+        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+        for (int i = 1; i <= totalTimePeriods; i++) {
+            if (i == 12) {
+                // Mocking: select a random student from the list to remove (Enrolled -> Dropped)
+                string student = deptMap["Computer Science"][0].front();
+                deptMap["Computer Science"][0].pop_front();
+                deptMap["Computer Science"][2].push_back(student);
+                cout << "  -> Removed " << student << " from Enrolled in Computer Science" << endl;
             }
-        };
+            if (i == 13) {
+                 // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
+                string waitlistedStudent = deptMap["Computer Science"][1].front();
+                deptMap["Computer Science"][0].pop_front();
+                deptMap["Computer Science"][1].(waitlistedStudent);
+                cout << "  -> Added " << waitlistedStudent << " to Enrolled in Computer Science" << endl;
+            }
+        }
 
-
+        displayEnvironment("Hour " + to_string(totalTimePeriods) + " (Registration Closes)");
+    }
+};
+   
 
 // Define main function
 int main() {
-    RegistrationSimulation sim(72); 
+    RegistrationSimulation sim(72);
+    
     sim.loadData("students_data.txt");
     sim.runSimulation();
 
