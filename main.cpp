@@ -9,19 +9,27 @@
 
 using namespace std;
 
-// Initialize a map to store department information, each associated with an array of lists for enrolled, waitlisted, and dropped students
+// Define the complex data structure required by the requirement analysis
+// Map Key: Department Name (e.g., "EECS", "Math")
+// Array [0]: Enrolled Students
+// Array [1]: Waitlisted Students
+// Array [2]: Dropped Students
 typedef map<string, array<list<string>, 3>> RegistrationMap;
 
+// We use an object-oriented approach with constructors to initialize the simulation state
 class RegistrationSimulation {
-    private:RegistrationMap deptMap;
+private:
+    RegistrationMap deptMap;
     int totalTimePeriods;
+
     public:
     // Constructor to initialize the simulation periods instead of manual setters
     RegistrationSimulation(int periods) {
         totalTimePeriods = periods;
     }
 
-    void loadData(const string& filename) {
+    // Function 1: Load initial data from external file
+    void loadData(string& filename) {
         // Open an external file to read initial data about departments and populate the map
         // If file does not open, print an error and exit
         
@@ -34,12 +42,9 @@ class RegistrationSimulation {
         void displayEnvironment(const string& timeStamp) {
         cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
         for (const auto& pair : deptMap) {
-            cout << "Department: " << pair.first << endl;
-            cout << "  [Enrolled]:   " << pair.second[0].size() << " students" << endl;
-            cout << "  [Waitlisted]: " << pair.second[1].size() << " students" << endl;
-            cout << "  [Dropped]:    " << pair.second[2].size() << " students" << endl;
+           
         }
-        cout << "========================================\n" << endl;
+        
     }
 
     // Define a function to simulate registration changes over time
