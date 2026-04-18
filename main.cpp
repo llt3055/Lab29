@@ -32,11 +32,11 @@ public:
         cout << "Attempting to load data from " << filename << "..." << endl;
         ifstream file(filename);
 
-    // If file does not open, print an error and exit
-    if (!file.is_open()) {
-        cerr << "Error: Could not open file " << filename << "!" << endl;
-        return;
-    }
+        // If file does not open, print an error and exit
+        if (!file.is_open()) {
+            cerr << "Error: Could not open file " << filename << "!" << endl;
+            return;
+        }
         
         string line, dept, studentId;
         int count = 0;
@@ -46,9 +46,8 @@ public:
             if (getline(ss, dept, ',') && getline(ss, studentId)) {
                 deptMap[dept][1].push_back(studentId);
                 count++;
+            }
         }
-    }
-
 
         // Close the file
         file.close();
@@ -73,7 +72,7 @@ public:
 
         for (int i = 1; i <= totalTimePeriods; i++) {
             bool changesMade = false;
-        // Parameters: map of departments, number of intervals (Handled by class members)
+            // Parameters: map of departments, number of intervals (Handled by class members)
             
             for (auto& pair : deptMap) { 
                 if (!pair.second[0].empty() && (rand() % 100 < 10)) { 
@@ -83,13 +82,12 @@ public:
                     changesMade = true;
                 }
                 
-            if (!pair.second[1].empty() && pair.second[0].size() < 10) { 
+                if (!pair.second[1].empty() && pair.second[0].size() < 10) { 
                     string waitlistedStudent = pair.second[1].front();
                     pair.second[1].pop_front();
                     pair.second[0].push_back(waitlistedStudent);
                     changesMade = true;
                 }
-                
             }
             
             if (changesMade && (i == 12 || i == 36 || i == 72)) {
@@ -98,28 +96,25 @@ public:
         }
 
         displayEnvironment("Hour " + to_string(totalTimePeriods) + " (Registration Closes)");
-    }
-};
 
-    // --- Beta Release Feature: Final Summary Report ---
-    cout << "\n>>> BETA RELEASE: FINAL SIMULATION SUMMARY <<<" << endl;
-    int totalEnrolled = 0, totalWaitlisted = 0, totalDropped = 0;
-    for (const auto& pair : deptMap) {
-        totalEnrolled += pair.second[0].size();
-        totalWaitlisted += pair.second[1].size();
-        totalDropped += pair.second[2].size();
+        // --- Beta Release Feature: Final Summary Report ---
+        cout << "\n>>> BETA RELEASE: FINAL SIMULATION SUMMARY <<<" << endl;
+        int totalEnrolled = 0, totalWaitlisted = 0, totalDropped = 0;
+        for (const auto& pair : deptMap) {
+            totalEnrolled += pair.second[0].size();
+            totalWaitlisted += pair.second[1].size();
+            totalDropped += pair.second[2].size();
+        }
+        cout << "Total Students Enrolled: " << totalEnrolled << endl;
+        cout << "Total Students Waitlisted: " << totalWaitlisted << endl;
+        cout << "Total Students Dropped: " << totalDropped << endl;
+        cout << ">>> END OF REPORT <<<\n" << endl;
     }
-    cout << "Total Students Enrolled: " << totalEnrolled << endl;
-    cout << "Total Students Waitlisted: " << totalWaitlisted << endl;
-    cout << "Total Students Dropped: " << totalDropped << endl;
-    cout << ">>> END OF REPORT <<<\n" << endl;
-  }
 };
 
 // Define main function
 int main() {
     RegistrationSimulation sim(72);
-    
     sim.loadData("students_data.txt");
     sim.runSimulation();
 
