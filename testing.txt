@@ -11,3 +11,8 @@ Actual Result: PASS. The program successfully reads the CSV format and populates
 Description: Verify that currently enrolled students have an approximate 10% chance of dropping the course in each time period.
 Expected Result: The number of students in the [Dropped] category should gradually increase over the 72-hour loop.
 Actual Result: PASS. The console logs confirm that students are successfully shifted from Enrolled to Dropped.
+
+--- Test Case 3: Waitlist Automation Logic ---
+Description: Verify that waitlisted students are automatically moved into the course when the enrolled list is under the capacity of 10.
+Expected Result: The [Waitlisted] count should decrease, and the [Enrolled] count should increase until capacity is reached.
+Actual Result: PASS. Waitlisted students successfully fill the empty spots left by dropped students.
