@@ -1,0 +1,11 @@
+Lab 31: Beta Release Bug Log
+Author: Tianyi Cao
+
+1. Bug: Compilation error due to undefined rand() and srand().
+   Fix: Included the <cstdlib> header file.
+
+2. Bug: Simulation produced the same sequence of events every run.
+   Fix: Included <ctime> and used srand(time(0)) in the constructor.
+
+3. Bug: Syntax errors caused by invisible full-width ghost spaces.
+   Fix: Cleared the problematic lines and typed using standard half-width spaces.
