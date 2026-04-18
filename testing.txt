@@ -17,25 +17,6 @@ Description: Verify that waitlisted students are automatically moved into the co
 Expected Result: The [Waitlisted] count should decrease, and the [Enrolled] count should increase until capacity is reached.
 Actual Result: PASS. Waitlisted students successfully fill the empty spots left by dropped students.
 
-```cpp
-void test_loadData_unit() {
-    cout << "\n--- Starting Unit Test: loadData() ---" << endl;
-    
-    // Initialize simulation with a dummy period just for testing
-    RegistrationSimulation testSim(1); 
-
-    // Test Phase 1: Ensure the program doesn't crash on invalid input
-    cout << "[Test Phase 1] Testing with an invalid file name:" << endl;
-    testSim.loadData("fake_file_that_does_not_exist.txt");
-    // Expected Output: "Error: Could not open file..."
-
-    // Test Phase 2: Ensure the program correctly parses the real data
-    cout << "\n[Test Phase 2] Testing with a valid file:" << endl;
-    testSim.loadData("students_data.txt");
-    // Expected Output: "Successfully loaded [X] student records..."
-    
-    cout << "--- Unit Test Complete ---" << endl;
-}
 
 ```cpp
 void test_loadData_unit() {
