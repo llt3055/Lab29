@@ -7,6 +7,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -29,33 +31,25 @@ public:
     void loadData(const string& filename){
         cout << "Attempting to load data from " << filename << "..." << endl;
         ifstream file(filename);
+
+    // If file does not open, print an error and exit
+    if (!file.is_open()) {
+        cerr << "Error: Could not open file " << filename << "!" << endl;
+        return;
+    }
         
         string line, dept, studentId;
         int count = 0;
 
-        // If file does not open, print an error and exit
-        if (!file.is_open()) {
-            cerr << "Error: Could not open file " << filename << "!" << endl;
-            return;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        if (getline(ss, dept, ',') && getline(ss, studentId)) {
+            deptMap[dept][1].push_back(studentId);
+            count++;
         }
+    }
 
-        
-
-        while (getline(file, line)) {
-            stringstream ss(line);
-            if (getline(ss, dept, ',') && getline(ss, studentId)) {
-                deptMap[dept][1].push_back(studentId);
-                count++;
-            }
-        }
-
-        if (!file.is_open()) {
-            cerr << "Error: Could not open file " << filename << "!" << endl;
-            return;
-        }
-
-        // Close the file
-        file.close();
+    file.close();
         cout << "Successfully loaded " << count << " student records into waitlists.\n" << endl;
     }
 
