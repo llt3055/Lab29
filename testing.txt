@@ -1,0 +1,10 @@
+Lab 30: Alpha Release Testing Document
+Author: Tianyi Cao
+Project: Registration Simulation
+
+--- Test Case 1: File Input/Output Operations ---
+Description: Verify that the program correctly opens, reads, and parses "students_data.txt".
+Expected Result: The program should output "Successfully loaded [X] student records into waitlists." without crashing.
+Actual Result: PASS. The program successfully reads the CSV format and populates the Waitlist arrays.
+
+ 
