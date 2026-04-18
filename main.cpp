@@ -101,6 +101,13 @@ public:
     }
 };
    
+    int totalEnrolled, totalWaitlisted, totalDropped;
+    for (const auto& pair : deptMap) {
+        totalEnrolled += pair.second[1].size();
+        totalWaitlisted += pair.second[1].size();
+        totalDropped += pair.second[2].size();
+    }
+
 
 // Define main function
 int main() {
