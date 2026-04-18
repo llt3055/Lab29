@@ -1,0 +1,32 @@
+Lab 31: Beta Release Bug Log
+Author: Tianyi Cao
+
+1. Bug: Compilation error due to undefined rand() and srand().
+   Fix: Included the <cstdlib> header file.
+
+2. Bug: Simulation produced the same sequence of events every run.
+   Fix: Included <ctime> and used srand(time(0)) in the constructor.
+
+3. Bug: Syntax errors caused by invisible full-width ghost spaces.
+   Fix: Cleared the problematic lines and typed using standard half-width spaces.
+
+4. Bug: File parsing skipped lines or crashed.
+   Fix: Used a while(getline()) loop with stringstream to safely parse the CSV.
+
+5. Bug: Program failed silently when the txt file was missing.
+   Fix: Add an if(!file.is_open()) check to catch the error.
+
+6. Bug: Git push failed with "No configured push destination".
+   Fix: Run git push --set-upstream origin beta to link the new branch.
+
+7. Bug: Program crashes trying to move a student from a empty Waitlist.
+   Fix: Added !pair.second[1].empty() check before using .front().
+
+8. Bug: Terminal output was flooded and unreadable.
+   Fix: Added a condition to only print log at hour 12, 36, and 72.
+
+9. Bug: Students were duplicated when moving to the Enrolled list.
+   Fix: Ensured .pop_front() was calling immediately to remove them from the Waitlist.
+
+10. Bug: Parentheses and braces {} mismatches causing "Unexpected End of File".
+    Fix: Reindented the code and ensured the class ended cleanly with };
