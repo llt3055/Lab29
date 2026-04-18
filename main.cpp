@@ -46,8 +46,9 @@ public:
             if (getline(ss, dept, ',') && getline(ss, studentId)) {
                 deptMap[dept][1].push_back(studentId);
                 count++;
-            }
         }
+    }
+
 
         // Close the file
         file.close();
@@ -73,18 +74,6 @@ public:
         for (int i = 1; i <= totalTimePeriods; i++) {
             bool changesMade = false;
         // Parameters: map of departments, number of intervals (Handled by class members)
-        for (auto& pair : deptMap) {
-
-        // Define a function to simulate registration changes over time
-        if (!pair.second[1].empty() && pair.second[0].size() < 10) {
-            string waitlistedStudent = pair.second[1].front();
-            pair.second[1].pop_front();
-            pair.second[0].push_back(waitlistedStudent);
-            changesMade = true;
-        }
-
-        for (int i = 1; i <= totalTimePeriods; i++) {
-            bool changesMade = false;
             
             for (auto& pair : deptMap) { 
                 if (!pair.second[0].empty() && (rand() % 100 < 10)) { 
