@@ -30,12 +30,6 @@ public:
         cout << "Attempting to load data from " << filename << "..." << endl;
         ifstream file(filename);
         
-        // If file does not open, print an error and exit
-        if (!file.is_open()) {
-            cerr << "Error: Could not open file " << filename << "!" << endl;
-            return;
-        }
-
         string line, dept, studentId;
         int count = 0;
 
@@ -43,6 +37,16 @@ public:
         if (!file.is_open()) {
             cerr << "Error: Could not open file " << filename << "!" << endl;
             return;
+        }
+
+        
+
+        while (getline(file, line)) {
+            stringstream ss(line);
+            if (getline(ss, dept, ',') && getline(ss, studentId)) {
+                deptMap[dept][1].push_back(studentId);
+                count++;
+            }
         }
 
         if (!file.is_open()) {
@@ -67,42 +71,42 @@ public:
     } 
 
     // Define a function to simulate registration changes over time
+    void runSimulation() {
+        displayEnvironment("Hour 0 (Registration Opens)");
+        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+
     // Parameters: map of departments, number of intervals (Handled by class members)
     void runSimulation() {
         displayEnvironment("Hour 0 (Registration Opens)");
-
-        // Begin a time-based simulation for registration changes
-            // For 72 time intervals
-                // Iterate through each department in the map
-                    // For each department, simulate changes
-                        // Randomly decide if a student is to be added or removed from each category (enrolled, waitlisted, dropped)
-                            // If adding, generate or select a new student name to add to the list
-                            // If removing, select a random student from the list to remove
-                        
-                        // Print the changes for this interval, e.g., "Added {student} to {category} in {department}"
-                        
-                // Simulate more complex registration changes
-                // random events impacting the registration
-                // system crashes, prerequisite overrides, mass drops
-                
-                // Wait or pause briefly to simulate the passage of time between intervals
-        
-        // --- WIREFRAME MOCKUP CODE BELOW ---
         cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+
+        // Define a function to simulate registration changes over time
+    void runSimulation() {
+        displayEnvironment("Hour 0 (Registration Opens)");
+        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+
         for (int i = 1; i <= totalTimePeriods; i++) {
-            if (i == 12) {
-                // Mocking: select a random student from the list to remove (Enrolled -> Dropped)
-                string student = deptMap["Computer Science"][0].front();
-                deptMap["Computer Science"][0].pop_front();
-                deptMap["Computer Science"][2].push_back(student);
-                cout << "  -> Removed " << student << " from Enrolled in Computer Science" << endl;
+            bool changesMade = false;
+            
+            for (auto& pair : deptMap) { 
+                if (!pair.second[0].empty() && (rand() % 100 < 10)) { 
+                    string student = pair.second[0].front();
+                    pair.second[0].pop_front();
+                    pair.second[2].push_back(student);
+                    changesMade = true;
+                }
+                
+                if (!pair.second[1].empty() && pair.second[0].size() < 10) { 
+                    string waitlistedStudent = pair.second[1].front();
+                    pair.second[1].pop_front();
+                    pair.second[0].push_back(waitlistedStudent);
+                    changesMade = true;
+                }
+                
             }
-            if (i == 13) {
-                 // Mocking: select a new student name to add to the list (Waitlist -> Enrolled)
-                string waitlistedStudent = deptMap["Computer Science"][1].front();
-                deptMap["Computer Science"][1].pop_front();
-                deptMap["Computer Science"][0].push_back(waitlistedStudent);
-                cout << "  -> Added " << waitlistedStudent << " to Enrolled in Computer Science" << endl;
+            
+            if (changesMade && (i == 12 || i == 36 || i == 72)) {
+                 cout << ">> Activity logged at Hour " << i << "..." << endl;
             }
         }
 
@@ -117,7 +121,7 @@ int main() {
     
     sim.loadData("students_data.txt");
     sim.runSimulation();
-    
+
     // End of main function
     return 0;
 }
