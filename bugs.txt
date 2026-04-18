@@ -9,3 +9,15 @@ Author: Tianyi Cao
 
 3. Bug: Syntax errors caused by invisible full-width ghost spaces.
    Fix: Cleared the problematic lines and typed using standard half-width spaces.
+
+4. Bug: File parsing skipped lines or crashed.
+   Fix: Used a while(getline()) loop with stringstream to safely parse the CSV.
+
+5. Bug: Program failed silently when the txt file was missing.
+   Fix: Add an if(!file.is_open()) check to catch the error.
+
+6. Bug: Git push failed with "No configured push destination".
+   Fix: Run git push --set-upstream origin beta to link the new branch.
+
+7. Bug: Program crashes trying to move a student from a empty Waitlist.
+   Fix: Added !pair.second[1].empty() check before using .front().
