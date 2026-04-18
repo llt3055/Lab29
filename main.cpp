@@ -26,14 +26,15 @@ public:
 
     // Function 1: Load initial data from external file
     void loadData(const string& filename){
-        // Open an external file to read initial data about departments and populate the map
-        // If file does not open, print an error and exit
+        cout << "Attempting to load data from " << filename << "..." << endl;
+        ifstream file(filename);
         
-        // Read data from file and populate map
-            // For each line, extract department and student data
-            // Insert student into the appropriate list in the array for their department
+        if (!file.is_open()) {
+            cerr << "Error: Could not open file " << filename << "!" << endl;
+            return;
+        }
         
-        // Close the file
+        file.close();
     }
         void displayEnvironment(const string& timeStamp) {
         cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
