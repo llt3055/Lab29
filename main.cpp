@@ -41,15 +41,16 @@ public:
         string line, dept, studentId;
         int count = 0;
 
-    while (getline(file, line)) {
-        stringstream ss(line);
-        if (getline(ss, dept, ',') && getline(ss, studentId)) {
-            deptMap[dept][1].push_back(studentId);
-            count++;
+        while (getline(file, line)) {
+            stringstream ss(line);
+            if (getline(ss, dept, ',') && getline(ss, studentId)) {
+                deptMap[dept][1].push_back(studentId);
+                count++;
+            }
         }
-    }
 
-    file.close();
+        // Close the file
+        file.close();
         cout << "Successfully loaded " << count << " student records into waitlists.\n" << endl;
     }
 
@@ -69,11 +70,18 @@ public:
         displayEnvironment("Hour 0 (Registration Opens)");
         cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
 
+        for (int i = 1; i <= totalTimePeriods; i++) {
+            bool changesMade = false;
         // Parameters: map of departments, number of intervals (Handled by class members)
-    
+        for (auto& pair : deptMap) {
 
         // Define a function to simulate registration changes over time
-    
+        if (!pair.second[1].empty() && pair.second[0].size() < 10) {
+            string waitlistedStudent = pair.second[1].front();
+            pair.second[1].pop_front();
+            pair.second[0].push_back(waitlistedStudent);
+            changesMade = true;
+        }
 
         for (int i = 1; i <= totalTimePeriods; i++) {
             bool changesMade = false;
