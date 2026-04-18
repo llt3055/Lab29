@@ -101,12 +101,16 @@ public:
     }
 };
    
-    int totalEnrolled, totalWaitlisted, totalDropped;
+    int totalEnrolled=0, totalWaitlisted=0, totalDropped=0;
     for (const auto& pair : deptMap) {
-        totalEnrolled += pair.second[1].size();
+        totalEnrolled += pair.second[0].size();
         totalWaitlisted += pair.second[1].size();
         totalDropped += pair.second[2].size();
     }
+    cout << "Total Students Enrolled: " << totalEnrolled << endl;
+        cout << "Total Students Waitlisted: " << totalWaitlisted << endl;
+        cout << "Total Students Dropped: " << totalDropped << endl;
+        cout << ">>> END OF REPORT <<<\n" << endl;
 
 
 // Define main function
