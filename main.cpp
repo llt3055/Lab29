@@ -22,6 +22,7 @@ public:
     // Constructor to initialize the simulation periods instead of manual setters
     RegistrationSimulation(int periods) {
         totalTimePeriods = periods;
+        srand(time(0)); // Seed random number generator for realistic simulation
     }
 
     // Function 1: Load initial data from external file
@@ -29,14 +30,32 @@ public:
         cout << "Attempting to load data from " << filename << "..." << endl;
         ifstream file(filename);
         
+        // If file does not open, print an error and exit
         if (!file.is_open()) {
             cerr << "Error: Could not open file " << filename << "!" << endl;
             return;
         }
-        
+
+        string line, dept, studentId;
+        int count = 0;
+
+        // If file does not open, print an error and exit
+        if (!file.is_open()) {
+            cerr << "Error: Could not open file " << filename << "!" << endl;
+            return;
+        }
+
+        if (!file.is_open()) {
+            cerr << "Error: Could not open file " << filename << "!" << endl;
+            return;
+        }
+
+        // Close the file
         file.close();
+        cout << "Successfully loaded " << count << " student records into waitlists.\n" << endl;
     }
-        void displayEnvironment(const string& timeStamp) {
+
+    void displayEnvironment(const string& timeStamp) {
         cout << "\n=== Registration State at " << timeStamp << " ===" << endl;
         for (const auto& pair : deptMap) {
             cout << "Department: " << pair.first << endl;
