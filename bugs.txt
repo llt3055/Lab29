@@ -21,3 +21,12 @@ Author: Tianyi Cao
 
 7. Bug: Program crashes trying to move a student from a empty Waitlist.
    Fix: Added !pair.second[1].empty() check before using .front().
+
+8. Bug: Terminal output was flooded and unreadable.
+   Fix: Added a condition to only print log at hour 12, 36, and 72.
+
+9. Bug: Students were duplicated when moving to the Enrolled list.
+   Fix: Ensured .pop_front() was calling immediately to remove them from the Waitlist.
+
+10. Bug: Parentheses and braces {} mismatches causing "Unexpected End of File".
+    Fix: Reindented the code and ensured the class ended cleanly with };
