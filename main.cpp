@@ -117,7 +117,7 @@ int main() {
     
     sim.loadData("students_data.txt");
     sim.runSimulation();
-
+    
     // End of main function
     return 0;
 }
