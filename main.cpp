@@ -75,28 +75,29 @@ public:
         displayEnvironment("Hour 0 (Registration Opens)");
         cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
 
-    // Parameters: map of departments, number of intervals (Handled by class members)
-    void runSimulation() {
-        displayEnvironment("Hour 0 (Registration Opens)");
-        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+        // Parameters: map of departments, number of intervals (Handled by class members)
+    
 
         // Define a function to simulate registration changes over time
-    void runSimulation() {
-        displayEnvironment("Hour 0 (Registration Opens)");
-        cout << "Simulation started for " << totalTimePeriods << " hours of add/drop period...\n" << endl;
+    
 
         for (int i = 1; i <= totalTimePeriods; i++) {
             bool changesMade = false;
             
             for (auto& pair : deptMap) { 
-                if (!pair.second[1].empty() && (rand() % 100 < 10)) { 
+                if (!pair.second[0].empty() && (rand() % 100 < 10)) { 
                     string student = pair.second[0].front();
-                    pair.second[2].pop_front();
+                    pair.second[0].pop_front();
                     pair.second[2].push_back(student);
                     changesMade = true;
                 }
                 
-                
+            if (!pair.second[1].empty() && pair.second[0].size() < 10) { 
+                    string waitlistedStudent = pair.second[1].front();
+                    pair.second[1].pop_front();
+                    pair.second[0].push_back(waitlistedStudent);
+                    changesMade = true;
+                }
                 
             }
             
